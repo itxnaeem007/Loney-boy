@@ -1,0 +1,41 @@
+.main-section {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 106px;
+    align-items: center;
+    flex-direction: column;
+}
+.upper-div{
+    position: absolute;
+    width: 100%;
+    padding: 100px;
+    padding-top: 60px;
+    top: 0px;
+    background-image: url('./../images/header.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+
+.placeholder {
+    width: 32px;
+    height: 32px;
+}
+
+@media (max-width: 967px) {
+    .main-section {
+        flex-direction: row;
+    }
+    .upper-div{
+        position: absolute;
+        width: 100%;
+        padding: 5px;
+        background-image: url('./../images/apes1.jpeg');
+        background-position: center;
+        padding-top: 90px;
+    }
+    
+}

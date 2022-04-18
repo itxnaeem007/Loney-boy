@@ -1,0 +1,92 @@
+.App {
+  text-align: center;
+  /* background-image: url('./images/bg.png'); */
+  /* background-position: center center; */
+  /* background-size: cover; */
+  background-color: black;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.modal-content {
+  border-radius: 2.5rem !important;
+  margin-top: 15rem !important;
+}
+.modal-footer {
+  justify-content: space-between !important;
+}
+.fade.modal-backdrop.show {
+  background-color: #505050e5;
+}
+@media (max-width: 992px) {
+  .fade.modal-backdrop.show {
+    margin-top: 5.5rem !important;
+  }
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+textarea:focus,
+input[type="password"]:focus,
+input[type="text"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="checkbox"]:focus,
+input[type="color"]:focus,
+select:focus,
+Menu:focus,
+button[type="button"]:focus,
+button[type="button"]:hover,
+.uneditable-input:focus {   
+  box-shadow: none !important;
+  outline: 0 none !important;
+  border: none !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

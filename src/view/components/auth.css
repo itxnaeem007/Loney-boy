@@ -1,0 +1,19 @@
+.btn-value{
+    background-color: white;
+    padding: 5px 15px;
+    color: black;
+    margin: auto;
+    box-shadow: 0 0 1px #fff, 0 0 3px #fff, 0 0 6px #fff, 0 0 12px #8b8d8e, 0 0 2px #9da0a1, 0 0 12px #7c6d6d, 0 0 3px #4d8eb3, 0 0 10px #92d7e5;
+}
+
+.image-wallet{
+    cursor: pointer;
+    width: 100px;
+}
+.wallet-box{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
