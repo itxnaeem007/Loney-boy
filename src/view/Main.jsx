@@ -180,7 +180,7 @@ const Main = () => {
                     </button>
                 }
 
-                <p className='main-p '>{totalMinted} / 500</p>
+                <p className='main-p '>{totalMinted} / 30</p>
             </div>
             <AuthModal
                 show={showAuthModal}
