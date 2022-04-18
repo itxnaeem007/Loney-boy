@@ -139,7 +139,7 @@ const Main = () => {
 
     return (
         <div className='main' id="main">
-            <div className='main-heading' >PRE-SALE / OG SALE</div>
+            <div className='main-heading' >GENESIS SALE</div>
             <div className='price-box'>
                 <img className='price-image' src={CardImage} alt="" />
                 <div className='sub-flex'>
