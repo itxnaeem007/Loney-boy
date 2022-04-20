@@ -16,6 +16,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 .modal-content {
+  background-color: #a6a6a6 !important;
   border-radius: 2.5rem !important;
   margin-top: 15rem !important;
 }

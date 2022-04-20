@@ -18,7 +18,7 @@ const Main = () => {
     let [mintValue, setMintValue] = useState(1)
     const [showAuthModal, setShowAuthModal] = useState(false)
     const selectedWallet = sessionStorage.getItem('wallet') || ''
-    const [ isSucceed , setIsSucced ] = useState(false)
+    const [isSucceed, setIsSucced] = useState(false)
 
     const getContract = async () => {
         const contract = new webThree.eth.Contract(ContractABI, CONTRACT_ADDRESS);
@@ -40,11 +40,11 @@ const Main = () => {
     }
     useEffect(() => {
         getTotalSupply()
-    }, [account ])
+    }, [account])
 
     useEffect(() => {
         isSucceed && getTotalSupply()
-    }, [ isSucceed])
+    }, [isSucceed])
 
     const fetchTotalSupply = async (value) => {
         let check = false
@@ -65,66 +65,59 @@ const Main = () => {
 
     const mint = async () => {
         setLoading(true)
+        toast.info('Minting Start')
+        let totalAmount = 0.15 * mintValue;
+        const amount = webThree.utils.toWei(totalAmount.toString(), 'ether')
+        const mintContractInstance = await getContract()
 
-        const valid = await fetchTotalSupply(mintValue)
-        if (valid) {
-            toast.info('Minting Start')
-            let totalAmount = 0.04 * mintValue;
-            const amount = webThree.utils.toWei(totalAmount.toString(), 'ether')
-            const mintContractInstance = await getContract()
-
-            //  await contract.methods.transfer('0x707db038c846d30401d25dbbdc4ace67c6585f57', amount).send({from: '0x3Ed0E4C21D742b6903828Bcdd4F802CDfD7dFEeb'})
-            try {
-                //from fahad
-                let res = await mintContractInstance.methods.totalSupply().call()
-                if (+res <= 500) {
-                    // await mintContractInstance.methods.whitelistMint(mintValue).call({ from: account , gas: 200000 })
-                    //     .catch(
-                    //         revertReason => {
-                    //             if (selectedWallet === SUPPORTED_WALLETS.METAMASK.name) {
-                    //                 toast.error(revertReason['message']?.split('"message": "')[1]?.split('"')[0])
-                    //                 console.log(revertReason['message']?.split('"message": "')[1]?.split('"')[0]);
-                    //                 throw new Error(revertReason['message']?.split('"message": "')[1]?.split('"')[0])
-                    //             } else if (selectedWallet === SUPPORTED_WALLETS.WALLET_CONNECT.name) {
-                    //                 toast.error(revertReason.toString()?.split('Error:')[1]?.split('!')[0])
-                    //                 console.log(revertReason.toString()?.split('Error:')[1]?.split('!')[0]);
-                    //                 throw new Error(revertReason.toString()?.split('Error:')[1]?.split('!')[0])
-                    //             }
-                    //             setLoading(false)
-                    //         }
-                    //     );
-                    const txHash = await mintContractInstance.methods.whitelistMint(mintValue ).send({ from: account , value: amount, gas: 200000 })
-                    setLoading(false)
-                    setIsSucced(true)
-                    console.log('txHash', txHash);
-                } else {
-                    toast.info('White listed NFT minting limit reached')
-                }
-
-                localStorage.setItem('minted', res)
-                toast.info('Token minted Successfully')
-
+        //  await contract.methods.transfer('0x707db038c846d30401d25dbbdc4ace67c6585f57', amount).send({from: '0x3Ed0E4C21D742b6903828Bcdd4F802CDfD7dFEeb'})
+        try {
+            //from fahad
+            let res = await mintContractInstance.methods.totalSupply().call()
+            if (+res <= 5000) {
+                // await mintContractInstance.methods.whitelistMint(mintValue).call({ from: account , gas: 200000 })
+                //     .catch(
+                //         revertReason => {
+                //             if (selectedWallet === SUPPORTED_WALLETS.METAMASK.name) {
+                //                 toast.error(revertReason['message']?.split('"message": "')[1]?.split('"')[0])
+                //                 console.log(revertReason['message']?.split('"message": "')[1]?.split('"')[0]);
+                //                 throw new Error(revertReason['message']?.split('"message": "')[1]?.split('"')[0])
+                //             } else if (selectedWallet === SUPPORTED_WALLETS.WALLET_CONNECT.name) {
+                //                 toast.error(revertReason.toString()?.split('Error:')[1]?.split('!')[0])
+                //                 console.log(revertReason.toString()?.split('Error:')[1]?.split('!')[0]);
+                //                 throw new Error(revertReason.toString()?.split('Error:')[1]?.split('!')[0])
+                //             }
+                //             setLoading(false)
+                //         }
+                //     );
+                const txHash = await mintContractInstance.methods.publicSaleMint(mintValue).send({ from: account, value: amount, gas: 200000 })
                 setLoading(false)
-            } catch (error) {
-                console.log('error', error);
-                setLoading(false)
-                if (error.code === 4001) {
-                    toast.error('User Reject transaction')
-                }
-
+                setIsSucced(true)
+                console.log('txHash', txHash);
+            } else {
+                toast.info('All NFTs are minted')
             }
-        } else {
+
+            localStorage.setItem('minted', res)
+            toast.info('Token minted Successfully')
+
             setLoading(false)
+        } catch (error) {
+            console.log('error', error);
+            setLoading(false)
+            if (error.code === 4001) {
+                toast.error('User Reject transaction')
+            }
 
         }
     }
 
     const handleChange = (key) => {
         let tempValue = mintValue;
-        if (key === 'plus' ) {
-            if (tempValue === 5) {
-                return
-            }
+        if (key === 'plus') {
+            // if (tempValue === 5) {
+            //     return
+            // }
             tempValue = tempValue + 1;
             setMintValue(tempValue)
         } else {
@@ -136,22 +129,25 @@ const Main = () => {
         }
 
     }
+    function hasDecimal (num) {
+        return !!(num % 1);
+    }
 
     return (
         <div className='main' id="main">
-            <div className='main-heading' >GENESIS SALE</div>
+            <div className='main-heading' >PUBLIC SALE</div>
             <div className='price-box'>
                 <img className='price-image' src={CardImage} alt="" />
                 <div className='sub-flex'>
                     <div className='main-min-head'>Price Per NFT</div>
-                    <div className='price-text'>0.04 ETH Each</div>
+                    <div className='price-text'>0.15 ETH Each</div>
 
                 </div>
             </div>
             <div className='input-box-xp mt-4 mt-md-5'>
                 <div className='input-sec'>
                     <FaMinus onClick={() => { handleChange('minus') }} />
-                    <input className='input-xp' value={mintValue} type="number" />
+                    <input className='input-xp' value={mintValue}  type="number" />
                     <FaPlus onClick={() => { handleChange('plus') }} />
                 </div>
                 <button className='btn-set' onClick={() => { setMintValue(5) }}>
@@ -163,7 +159,7 @@ const Main = () => {
                     Total
                 </div>
                 <div className='total-price'>
-                    {0.04 * mintValue} ETH
+                    {0.15 * mintValue} ETH
                 </div>
             </div>
             <div className='mt-4 mt-md-5'>
@@ -180,7 +176,7 @@ const Main = () => {
                     </button>
                 }
 
-                <p className='main-p '>{totalMinted} / 30</p>
+                <p className='main-p '>{totalMinted} / 5000</p>
             </div>
             <AuthModal
                 show={showAuthModal}
