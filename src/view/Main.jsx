@@ -66,7 +66,7 @@ const Main = () => {
     const mint = async () => {
         setLoading(true)
         toast.info('Minting Start')
-        let totalAmount = 0.15 * mintValue;
+        let totalAmount = 0.04 * mintValue;
         const amount = webThree.utils.toWei(totalAmount.toString(), 'ether')
         const mintContractInstance = await getContract()
 
@@ -135,31 +135,31 @@ const Main = () => {
 
     return (
         <div className='main' id="main">
-            <div className='main-heading' >PUBLIC SALE</div>
+            <div className='main-heading' >GENESIS SALE</div>
             <div className='price-box'>
                 <img className='price-image' src={CardImage} alt="" />
                 <div className='sub-flex'>
                     <div className='main-min-head'>Price Per NFT</div>
-                    <div className='price-text'>0.15 ETH Each</div>
+                    <div className='price-text'>0.04 ETH Each</div>
 
                 </div>
             </div>
             <div className='input-box-xp mt-4 mt-md-5'>
                 <div className='input-sec'>
-                    <FaMinus onClick={() => { handleChange('minus') }} />
+                    <FaMinus  onClick={() => { handleChange('minus') }} />
                     <input className='input-xp' value={mintValue}  type="number" />
                     <FaPlus onClick={() => { handleChange('plus') }} />
                 </div>
-                <button className='btn-set' onClick={() => { setMintValue(5) }}>
+                {/* <button className='btn-set' onClick={() => { setMintValue(5) }}>
                     Set Max
-                </button>
+                </button> */}
             </div>
             <div className='total-box mt-4 mt-md-5'>
                 <div className='total-text'>
                     Total
                 </div>
                 <div className='total-price'>
-                    {0.15 * mintValue} ETH
+                    {0.04 * mintValue} ETH
                 </div>
             </div>
             <div className='mt-4 mt-md-5'>
@@ -176,7 +176,7 @@ const Main = () => {
                     </button>
                 }
 
-                <p className='main-p '>{totalMinted} / 5000</p>
+                <p className='main-p '>{totalMinted} / 100</p>
             </div>
             <AuthModal
                 show={showAuthModal}
